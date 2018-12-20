@@ -1,8 +1,17 @@
 import logging
-from selenium import webdriver
 from google_page import GooglePage
+from driver_bootstrapper import driver
  
 logging.basicConfig(level=logging.INFO)
+
+def test_google_page_display_is_correct(driver):
+    driver.get("https://www.google.com")
+    google_page = GooglePage(driver)
+    assert google_page.is_logo_image_displayed() == True
+    assert google_page.is_search_box_displayed() == True
+    google_page.click_search()
+    assert google_page.is_non_existent_element_displayed() == False
+    driver.close()
    
 def test_google_search_input_not_readonly(driver):
     driver.get("https://www.google.com")

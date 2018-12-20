@@ -9,11 +9,17 @@ class GooglePage(BasePage):
 
     #Web elements:
 
+    def __get_logo_image(self):
+        return self.driver.find_element_by_css_selector("#hplogo")
+
     def __get_search_box(self):
-        return self.driver.find_element_by_css_selector("input[title='Search'")
+        return self.driver.find_element_by_css_selector("input[title='Search']")
 
     def __get_search_button(self):
-        return self.driver.find_element_by_css_selector("input[name='btnK'")
+        return self.driver.find_element_by_css_selector("input[name='btnK']")
+
+    def __get_not_existing_element(self):
+        return self.driver.find_element_by_css_selector("#not_existerr")
     
     #Page actions:
 
@@ -27,8 +33,22 @@ class GooglePage(BasePage):
 
     def click_search(self):
         self.logger.info('clicking search button')
-        self.__get_search_box().click()
+        self.__get_search_button().click()
 
     #Page conditions:
 
-    #TODO: is_element_present_and_clickable
+    def is_logo_image_displayed(self):
+        self.logger.info('Checking if logo displayed')
+        return self.is_displayed(self.__get_logo_image)
+
+    def is_search_box_displayed(self):
+        self.logger.info('Checking if search box displayed')
+        return self.is_displayed(self.__get_search_box)
+
+    def is_search_button_displayed(self):
+        self.logger.info('Checking if search button displayed')
+        return self.is_displayed(self.__get_search_button)
+
+    def is_non_existent_element_displayed(self):
+        self.logger.info('Checking if mpt existing element displayed')
+        return self.is_displayed(self.__get_not_existing_element)
