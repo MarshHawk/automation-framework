@@ -1,0 +1,12 @@
+name: qa-auto
+channels:
+  - conda-forge
+  - clinicalgraphics
+dependencies:
+- pip=9.0.1=py36_1
+- pip:
+  - selenium
+  - pytest
+  - pytest-selenium
+- selenium-chromedriver=2.27=0
+- geckodriver=0.23.0=h21ff451_0
