@@ -1,7 +1,8 @@
 import logging
 from google_page import GooglePage
-from driver_bootstrapper import driver
+#from driver_bootstrapper import driver
  
+#TODO move logging to command-line-option 
 logging.basicConfig(level=logging.INFO)
 
 def test_google_page_display_is_correct(driver):
@@ -9,7 +10,7 @@ def test_google_page_display_is_correct(driver):
     google_page = GooglePage(driver)
     assert google_page.is_logo_image_displayed() == True
     assert google_page.is_search_box_displayed() == True
-    google_page.click_search()
+    assert google_page.is_search_button_displayed() == True
     assert google_page.is_non_existent_element_displayed() == False
     driver.close()
    

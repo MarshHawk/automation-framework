@@ -1,5 +1,6 @@
 import logging
 from base_page import BasePage
+from selenium.webdriver.common.action_chains import ActionChains
 
 class GooglePage(BasePage):
 
@@ -16,7 +17,7 @@ class GooglePage(BasePage):
         return self.driver.find_element_by_css_selector("input[title='Search']")
 
     def __get_search_button(self):
-        return self.driver.find_element_by_css_selector("input[name='btnK']")
+        return self.driver.find_elements_by_css_selector("input[name='btnK']")[1]
 
     def __get_not_existing_element(self):
         return self.driver.find_element_by_css_selector("#not_existerr")
@@ -33,7 +34,7 @@ class GooglePage(BasePage):
 
     def click_search(self):
         self.logger.info('clicking search button')
-        self.__get_search_button().click()
+        ActionChains(self.driver).move_to_element(self.__get_search_button()).click().perform()
 
     #Page conditions:
 
@@ -50,5 +51,5 @@ class GooglePage(BasePage):
         return self.is_displayed(self.__get_search_button)
 
     def is_non_existent_element_displayed(self):
-        self.logger.info('Checking if mpt existing element displayed')
+        self.logger.info('Checking if non-existent element displayed')
         return self.is_displayed(self.__get_not_existing_element)
