@@ -17,7 +17,7 @@ class GooglePage(BasePage):
         return self.driver.find_element_by_css_selector("input[title='Search']")
 
     def __get_search_button(self):
-        return self.driver.find_elements_by_css_selector("input[name='btnK']")[1]
+        return self.driver.find_elements_by_css_selector("input[name='btnK']")[-1]
 
     def __get_not_existing_element(self):
         return self.driver.find_element_by_css_selector("#not_existerr")

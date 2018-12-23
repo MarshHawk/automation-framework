@@ -1,0 +1,64 @@
+import pytest
+from pytest_bdd import scenario, given, when, then
+from google_page import GooglePage
+
+TRUE_FIT = 'True Fit'
+
+@scenario('google.feature', 'Simple Google Search homepage smoke test')
+def test_publish():
+    pass
+    
+@given("I go to Google")
+def given_init():
+    pass
+
+@when('I reach the page')
+def page_init(google_page):
+    #TODO:
+    #assert google_page.on_page == True
+    pass
+
+@then('the Google logo image will be displayed')
+def log_is_displayed(google_page):
+    #TODO: find_by last
+    assert google_page.is_logo_image_displayed() == True
+
+@then('the search box will be displayed')
+def search_box_is_displayed(google_page):
+    assert google_page.is_search_box_displayed() == True
+
+@then('the Google Search button will be displayed')
+def search_button_is_displayed(google_page):
+    assert google_page.is_search_button_displayed() == True
+
+@then('I click the search button')
+def click_search_button(google_page):
+    google_page.click_search()
+
+@then('nothing happens, I stay on the Google home page')
+def verify_on_google_home_page(google_page):
+    pass
+
+@then('I type \'True Fit\' in the search box')
+def type_search(google_page):
+    google_page.set_search_box_text(TRUE_FIT)
+
+@then('the displayed search box text matches what I typed')
+def verify_search_text(google_page):
+    actual_search_text = google_page.get_search_box_text()
+    assert actual_search_text, TRUE_FIT
+
+@then('click the search button')
+def click_search(google_page):
+    google_page.click_search()
+
+@then('I arrive at the search results page')
+def on_search_results_page(google_page):
+    pass  
+
+@pytest.fixture("module")
+def google_page(driver_bootstrapper):
+    base_url = "https://www.google.com"
+    driver_bootstrapper.get(base_url)
+    yield GooglePage(driver_bootstrapper)
+    driver_bootstrapper.close()

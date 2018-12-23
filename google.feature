@@ -1,16 +1,16 @@
 Feature: Google
     Verify basic Google search functionality
 
-Scenario: Searching Google
-    Given I navigate to Google
+Scenario: Simple Google Search homepage smoke test
+    Given I go to Google
     When I reach the page
-    Then the Google logo image will be present and clickable
-    And the search input box will be present and clickable
-    And the 'Google Search' button will be present and clickable
+    Then the Google logo image will be displayed
+    And the search box will be displayed
+    And the Google Search button will be displayed
     Then I click the search button
     And nothing happens, I stay on the Google home page
     Then I type 'True Fit' in the search box
-    And the the search box diplay text matches 'True Fit'
+    And the displayed search box text matches what I typed
     Then I click the search button
-    And I go to the search results page
+    And I arrive at the search results page
     
