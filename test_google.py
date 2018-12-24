@@ -1,9 +1,8 @@
 import logging
 import pytest
 from google_page import GooglePage
-#from driver_bootstrapper import driver
-from selenium.webdriver.support.event_firing_webdriver import EventFiringWebDriver
- 
+from google_result_page import GoogleSearchResultPage
+
 #TODO move logging to command-line-option 
 logging.basicConfig(level=logging.INFO)
 
@@ -20,12 +19,19 @@ class TestGoogle(object):
         google_page.set_search_box_text(expected_search_text)
         actual_search_text = google_page.get_search_box_text()
         assert actual_search_text, expected_search_text
+        google_page.clear_search_box()
+        actual_search_text = google_page.get_search_box_text()
+        assert actual_search_text == ''
 
-    def test_google_search_button(self, google_page):
+    def test_google_search_button(self, google_page, google_results_page):
         google_page.click_search()
+        assert google_page.is_on_page() == True
+        assert google_results_page.is_on_page() == False
         expected_search_text = "True Fit"
         google_page.set_search_box_text(expected_search_text)
+        google_page.click_search_box()
         google_page.click_search()
+        assert google_results_page.is_on_page() == True
 
     @pytest.fixture(scope="class")
     def google_page(self, driver_bootstrapper):
@@ -33,3 +39,7 @@ class TestGoogle(object):
         driver_bootstrapper.get(base_url)
         yield GooglePage(driver_bootstrapper)
         driver_bootstrapper.close()
+    
+    @pytest.fixture("function")
+    def google_results_page(self, driver_bootstrapper):
+        return GoogleSearchResultPage(driver_bootstrapper)

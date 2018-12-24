@@ -1,6 +1,7 @@
 import pytest
 from pytest_bdd import scenario, given, when, then
 from google_page import GooglePage
+from google_result_page import GoogleSearchResultPage
 
 TRUE_FIT = 'True Fit'
 
@@ -14,9 +15,7 @@ def given_init():
 
 @when('I reach the page')
 def page_init(google_page):
-    #TODO:
-    #assert google_page.on_page == True
-    pass
+    assert google_page.is_on_page() == True
 
 @then('the Google logo image will be displayed')
 def log_is_displayed(google_page):
@@ -36,8 +35,9 @@ def click_search_button(google_page):
     google_page.click_search()
 
 @then('nothing happens, I stay on the Google home page')
-def verify_on_google_home_page(google_page):
-    pass
+def verify_on_google_home_page(google_page, google_results_page):
+    assert google_page.is_on_page() == True
+    assert google_results_page.is_on_page() == False
 
 @then('I type \'True Fit\' in the search box')
 def type_search(google_page):
@@ -53,8 +53,8 @@ def click_search(google_page):
     google_page.click_search()
 
 @then('I arrive at the search results page')
-def on_search_results_page(google_page):
-    pass  
+def on_search_results_page(google_page, google_results_page):
+    assert google_results_page.is_on_page() == True
 
 @pytest.fixture("module")
 def google_page(driver_bootstrapper):
@@ -62,3 +62,7 @@ def google_page(driver_bootstrapper):
     driver_bootstrapper.get(base_url)
     yield GooglePage(driver_bootstrapper)
     driver_bootstrapper.close()
+
+@pytest.fixture("function")
+def google_results_page(driver_bootstrapper):
+    return GoogleSearchResultPage(driver_bootstrapper)

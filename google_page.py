@@ -10,6 +10,9 @@ class GooglePage(BasePage):
 
     #Web elements:
 
+    def __get_page_class(self):
+        return self.driver.find_element_by_css_selector("#gsr.hp")
+
     def __get_logo_image(self):
         return self.driver.find_element_by_css_selector("#hplogo")
 
@@ -18,6 +21,9 @@ class GooglePage(BasePage):
 
     def __get_search_button(self):
         return self.driver.find_elements_by_css_selector("input[name='btnK']")[-1]
+
+    def __get_base_search_form(self):
+        return self.driver.find_element_by_css_selector("#searchform")
 
     def __get_not_existing_element(self):
         return self.driver.find_element_by_css_selector("#not_existerr")
@@ -32,11 +38,27 @@ class GooglePage(BasePage):
         self.logger.info('typing {} in search box'.format(text_to_search))
         self.__get_search_box().send_keys(text_to_search)
 
+    def click_search_box(self):
+        self.logger.info('clearing search box')
+        self.__get_search_box().click()
+
+    def clear_search_box(self):
+        self.logger.info('clearing search box')
+        self.__get_search_box().clear()
+
+    def click_outside_of_search_box(self):
+        self.logger.info('clearing outside search box')
+        ActionChains(self.driver).move_to_element(self.__get_page_class()).click().perform()
+
     def click_search(self):
         self.logger.info('clicking search button')
         ActionChains(self.driver).move_to_element(self.__get_search_button()).click().perform()
 
     #Page conditions:
+
+    def is_on_page(self):
+        self.logger.info('Verifying if current page is Google homepage')
+        return self.does_element_exist(self.__get_page_class)
 
     def is_logo_image_displayed(self):
         self.logger.info('Checking if logo displayed')
