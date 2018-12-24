@@ -13,6 +13,15 @@ class GoogleSearchResultPage(BasePage):
     def __get_page_class(self):
         return self.driver.find_element_by_css_selector("#gsr.srp")
 
+    def __get_search_box(self):
+        return self.driver.find_element_by_css_selector("input[title='Search']")
+
+    #Page actions:
+
+    def get_search_box_text(self):
+        self.logger.info('getting value of search box text')
+        return self.__get_search_box().get_attribute('value')
+
     #Page conditions:
 
     def is_on_page(self):

@@ -32,6 +32,7 @@ class TestGoogle(object):
         google_page.click_search_box()
         google_page.click_search()
         assert google_results_page.is_on_page() == True
+        assert google_results_page.get_search_box_text() == expected_search_text
 
     @pytest.fixture(scope="class")
     def google_page(self, driver_bootstrapper):
