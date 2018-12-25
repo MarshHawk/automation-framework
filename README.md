@@ -16,11 +16,11 @@
 ### Rules:
 * There are no rules
 * There are best practice guidelines on coding practices:
-  * Write page object member functions to interact with the page and/or retrieve values, do not use web elements in the tests. The tests should not call functions that return web elements directly. Functions for finding web elements should be private members of the class
+  * Write page object member functions to interact with the page and/or retrieve values, do not use web elements in the tests. The tests should not call functions that return web elements directly. Functions for finding web elements should be private members of page the classes
   * Assert and verify should only be used inside the test functions' scope, not the page object members
   * Create appropriate waits (e.g. for the presence of an expected element or attribute on the page) when timing issues arise. Don't use time.sleep.
   * Use CSS selectors or IDs to find elements, do not use XPath
-  * Pass fixtures as parameters unless the same functionality cannot otherwise be achieved
+  * Pass fixtures as parameters unless the intended functionality cannot otherwise be achieved
 
 ### Choices:
   #### What Conda offers:
@@ -49,7 +49,7 @@
 [Uncle Bob bullet points on quality, QA, and automated testing](https://content.pivotal.io/blog/uncle-bob-agile-testing-and-bdd)
 
 ### To do:
-* Finish Google tests
+* ~~Finish Google tests~~
 * ~~Appropriate url/page injection~~
 * Implement verify (soft assert)
 * Test suites
@@ -58,5 +58,5 @@
 * Package for distribution/Folderization
 * Docs
 * Scenario/data loading
-* Verify posts
+* Verify post requests (driver configuration)
 * Sauce POC

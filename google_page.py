@@ -1,6 +1,7 @@
 import logging
 from base_page import BasePage
 from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.keys import Keys
 
 class GooglePage(BasePage):
 
@@ -21,12 +22,6 @@ class GooglePage(BasePage):
 
     def __get_search_button(self):
         return self.driver.find_elements_by_css_selector("input[name='btnK']")[-1]
-
-    def __get_base_search_form(self):
-        return self.driver.find_element_by_css_selector("#searchform")
-
-    def __get_not_existing_element(self):
-        return self.driver.find_element_by_css_selector("#not_existerr")
     
     #Page actions:
 
@@ -36,7 +31,9 @@ class GooglePage(BasePage):
 
     def set_search_box_text(self, text_to_search):
         self.logger.info('typing {} in search box'.format(text_to_search))
-        self.__get_search_box().send_keys(text_to_search)
+        we = self.__get_search_box()
+        we.send_keys(text_to_search)
+        we.send_keys(Keys.TAB)
 
     def click_search_box(self):
         self.logger.info('clearing search box')
@@ -45,11 +42,7 @@ class GooglePage(BasePage):
     def clear_search_box(self):
         self.logger.info('clearing search box')
         self.__get_search_box().clear()
-
-    def click_outside_of_search_box(self):
-        self.logger.info('clearing outside search box')
-        ActionChains(self.driver).move_to_element(self.__get_page_class()).click().perform()
-
+        
     def click_search(self):
         self.logger.info('clicking search button')
         ActionChains(self.driver).move_to_element(self.__get_search_button()).click().perform()
@@ -71,7 +64,3 @@ class GooglePage(BasePage):
     def is_search_button_displayed(self):
         self.logger.info('Checking if search button displayed')
         return self.is_displayed(self.__get_search_button)
-
-    def is_non_existent_element_displayed(self):
-        self.logger.info('Checking if non-existent element displayed')
-        return self.is_displayed(self.__get_not_existing_element)
