@@ -24,12 +24,4 @@ def log_is_displayed():
 
 @then('I BDD again')
 def search_box_is_displayed():
-    log.info('and') 
-
-@pytest.fixture()
-def google_page():
-    #base_url = "https://www.google.com"
-    #driver.get(base_url)
-    #yield GooglePage(driver)
-    #driver.close()
-    pass
+    log.info('and')
