@@ -8,5 +8,6 @@ dependencies:
   - selenium
   - pytest
   - pytest-bdd
+  - pytest-html
 - selenium-chromedriver=2.27=0
 - geckodriver=0.23.0=h21ff451_0
