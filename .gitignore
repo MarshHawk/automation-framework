@@ -1,6 +1,8 @@
 # PyTest reports
 *.html
 *.xml
+*.json
+node_modules/
 assets/
 
 ### The best IDE ###

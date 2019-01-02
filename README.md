@@ -1,8 +1,13 @@
 ## How to:
 * [The Anaconda Python distribution must be installed](https://www.anaconda.com/download/)
-* Check that conda is available at the command prompt 
+* Check that conda is available at the command prompt:
     ```conda -v```
-* Run the command to build your virtual environment (use env-win64.yml for Windows)
+* Clone this repo and cd into the root directory:
+
+    ```git clone https://github.com/MarshHawk/automation-framework.git```
+
+    ```cd automation-framework```
+* Run the command to build your virtual environment (use env-win64.yml for Windows):
     
     ```conda env create -f=env.yml```
     
@@ -12,12 +17,22 @@
     ```source deactivate qa-auto```
     
     ```conda env remove -n=qa-auto```
-* To run all of the tests, simply execute the pytest command in the root directory of the project. This should run the tests in both Chrome and Firefox.
+* Having activated the env, to run all of the tests, simply execute the pytest command in the root directory of the project. This should run the tests in both Chrome and Firefox.
     ```pytest```
-* There are additional command line args to use for specific use cases (test suites, specific browsers, reporting formats, ci/cd configuration, data capture and storage). However, it helps to have a default configuration to run all the tests associated with a particular domain, namespace, or product. See the section on IDE usage for usage in an IDE.
-    * To create a basic report.html file in the root directory (uncomment verifies to get failing results in the report):
-    ```pytest --html=google-results.html --self-contained-html test_google.py```
-* To view verify in action:
+* If you keep your locally installed version of Firefox < 48, please pass the legacy flag:
+    ```pytest --legacy=True```
+
+* To create a basic html report file in the root directory, open the html file with chrome:
+
+    ```pytest --html=google-results.html --self-contained-html```
+
+* To create a cucumber report.html file in the root directory (uncomment verifies to get failing results in the report):
+
+    ```pytest --cucumber-json=google-results.json```
+
+    * Once the google-results.json file is in the root directory of the project, run the python script to convert it to cucumber-google-results.html, which should open in your default browser:
+
+        ```python run_cucumber_report_builder.py```
 
 ### Best Practices for Coding:
 * Write page object member functions to interact with the page and/or retrieve values, do not use web elements in the tests. The tests should not call functions that return web elements directly. Functions for finding web elements should be private members of page the classes
@@ -27,6 +42,7 @@
 * Write tests that test one thing and test it well. In my experience, people tend to write longer/larger tests instead of isolating functionality into pieces that are as small as logically possible. With more specific tests, verify (soft assert) becomes less relevant. However, at my current place of employment, verify is used exclusively by convention instead of assert. On a side note, V
 * [PEP 8 - the Style Guide for Python Code](https://pep8.org/)
 * Pass fixtures as parameters unless the intended functionality cannot otherwise be achieved
+* Automate test reporting, the manual process for generating the reports here including the nodejs dependency is just for viewing examples
 
 ### Choices:
   #### What Conda offers:
