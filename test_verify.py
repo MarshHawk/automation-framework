@@ -24,7 +24,7 @@ def test_failing_with_verify(verify):
 def test_failing_verify(verify):
     verify(1, 2)
     verify('black', 'blue')
-    verify(True == False)
+    verify(True, False)
 
 #def test_mixed_pass_fail_first(verify):
 def test_mixed_pass_fail_middle(verify):

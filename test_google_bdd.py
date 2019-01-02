@@ -6,11 +6,11 @@ from google_result_page import GoogleSearchResultPage
 TRUE_FIT = 'True Fit'
 
 @scenario('google.feature', 'Simple Google Search homepage smoke test')
-def test_publish():
+def test_publish(google_page):
     pass
     
 @given("I go to Google")
-def given_init():
+def given_init(google_page):
     pass
 
 @when('I reach the page')
@@ -19,7 +19,6 @@ def page_init(google_page):
 
 @then('the Google logo image will be displayed')
 def log_is_displayed(google_page):
-    #TODO: find_by last
     assert google_page.is_logo_image_displayed() == True
 
 @then('the search box will be displayed')
@@ -57,12 +56,12 @@ def on_search_results_page(google_page, google_results_page):
     assert google_results_page.is_on_page() == True
 
 @pytest.fixture("module")
-def google_page(driver_bootstrapper):
+def google_page(driver):
     base_url = "https://www.google.com"
-    driver_bootstrapper.get(base_url)
-    yield GooglePage(driver_bootstrapper)
-    driver_bootstrapper.close()
+    driver.get(base_url)
+    yield GooglePage(driver)
+    driver.close()
 
 @pytest.fixture("function")
-def google_results_page(driver_bootstrapper):
-    return GoogleSearchResultPage(driver_bootstrapper)
+def google_results_page(driver):
+    return GoogleSearchResultPage(driver)

@@ -34,12 +34,12 @@ class TestGoogle(object):
         assert google_page.is_on_page() == False
 
     @pytest.fixture(scope="class")
-    def google_page(self, driver_bootstrapper):
+    def google_page(self, driver):
         base_url = "https://www.google.com"
-        driver_bootstrapper.get(base_url)
-        yield GooglePage(driver_bootstrapper)
-        driver_bootstrapper.close()
+        driver.get(base_url)
+        yield GooglePage(driver)
+        driver.close()
     
     @pytest.fixture("function")
-    def google_results_page(self, driver_bootstrapper):
-        return GoogleSearchResultPage(driver_bootstrapper)
+    def google_results_page(self, driver):
+        return GoogleSearchResultPage(driver)
