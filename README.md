@@ -9,7 +9,7 @@
     ```cd automation-framework```
 * Run the command to build your virtual environment (use env-win64.yml for Windows):
     
-    ```conda env create -f=env.yml```
+    ```conda env create -f=env.yml python=3.6```
     
     ```source activate qa-auto```
 * To track changes to the env, when you add or update a dependency in env.yml:
