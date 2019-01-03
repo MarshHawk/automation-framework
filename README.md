@@ -1,6 +1,6 @@
 ## How to:
 * [The Anaconda Python distribution must be installed](https://www.anaconda.com/download/)
-* Check that conda is available at the command prompt:
+* Open a command prompt and check that conda is available:
     ```conda -v```
 * Clone this repo and cd into the root directory:
 
@@ -17,20 +17,16 @@
     ```source deactivate qa-auto```
     
     ```conda env remove -n=qa-auto```
-* Having activated the env, to run all of the tests, simply execute the pytest command in the root directory of the project. This should run the tests in both Chrome and Firefox.
+* Having activated the env, to run all of the tests, simply execute the pytest command in the root directory of the project. This command should run the tests in both Chrome and Firefox:
     ```pytest```
 * If you keep your locally installed version of Firefox < 48, please pass the legacy flag:
     ```pytest --legacy=True```
 
-* To create a basic html report file in the root directory, open the html file with chrome:
+* To create html reports in the root directory, run with the following flags:
 
-    ```pytest --html=google-results.html --self-contained-html```
+    ```pytest --html=google-results.html --self-contained-html --cucumber-json=google-results.json```
 
-* To create a cucumber report.html file in the root directory (uncomment verifies to get failing results in the report):
-
-    ```pytest --cucumber-json=google-results.json```
-
-    * Once the google-results.json file is in the root directory of the project, run the python script to convert it to cucumber-google-results.html, which should open in your default browser:
+* Now google-results.html is in the root and can be opened with Chrome. Also, google-results.json file is in the root directory of the project, now run the python script to convert it to cucumber-google-results.html, which should open in your default browser:
 
         ```python run_cucumber_report_builder.py```
 
@@ -41,7 +37,6 @@
 * Use CSS selectors or IDs to find elements, do not use XPath
 * Write tests that test one thing and test it well. In my experience, people tend to write longer/larger tests instead of isolating functionality into pieces that are as small as logically possible.
 * [PEP 8 - the Style Guide for Python Code](https://pep8.org/)
-* Pass fixtures as parameters unless the intended functionality cannot otherwise be achieved
 * Automate test reporting, the manual process for generating the reports here, including the nodejs dependency, is just for viewing examples
 
 ### Choices:
