@@ -39,10 +39,10 @@
 * Assert and verify should only be used inside the test functions' scope, not the page object members
 * Create appropriate waits (e.g. for the presence of an expected element or attribute on the page) when timing issues arise. Don't use time.sleep.
 * Use CSS selectors or IDs to find elements, do not use XPath
-* Write tests that test one thing and test it well. In my experience, people tend to write longer/larger tests instead of isolating functionality into pieces that are as small as logically possible. With more specific tests, verify (soft assert) becomes less relevant. However, at my current place of employment, verify is used exclusively by convention instead of assert. On a side note, V
+* Write tests that test one thing and test it well. In my experience, people tend to write longer/larger tests instead of isolating functionality into pieces that are as small as logically possible.
 * [PEP 8 - the Style Guide for Python Code](https://pep8.org/)
 * Pass fixtures as parameters unless the intended functionality cannot otherwise be achieved
-* Automate test reporting, the manual process for generating the reports here including the nodejs dependency is just for viewing examples
+* Automate test reporting, the manual process for generating the reports here, including the nodejs dependency, is just for viewing examples
 
 ### Choices:
   #### What Conda offers:
@@ -58,10 +58,9 @@
   * Excellent plugins that work out-of-the-box 
 
   #### What VS Code offers
-  * Professional Editions of IDEs can get a bit pricey.
+  * VS Code is free, while professional editions of IDEs can get a bit pricey.
   * My experience with VS Code has led me to the opinion that it is the best development experience available outside of Visual Studio Enterprise for .Net. I even use VS Code for Java.
   * VS Code offers the familiar themes (Darcula, etc...), compilation warnings, lots of plugins, and debugging.
-  * It's free.
 
 ### Resources:
 [Selenium 3 docs](https://seleniumhq.github.io/selenium/docs/api/py/index.html) 
@@ -71,8 +70,6 @@
 [pytest-bdd source/docs](https://github.com/pytest-dev/pytest-bdd)
 
 [pytest-html source/docs](https://github.com/pytest-dev/pytest-html)
-
-[Verify statements](https://muthutechno.wordpress.com/2015/01/26/implementing-verify-statements-for-testng-framework/)
 
 [Sauce labs tips on CSS selectors](https://saucelabs.com/blog/selenium-tips-intermediate-css-selectors-in-selenium)
 
@@ -85,13 +82,12 @@
 ### To do:
 * ~~Finish Google tests~~
 * ~~Appropriate url/page injection~~
-* Implement verify (soft assert)
-* Test configuration and parameterization through scenario files
-* Better DI for drivers
-* Integrate logging into reports
-* Separate packaging of core modules and page/domain specific modules
-* Sphinx docs
-* Scenario/data loading
-* Test post requests (driver configuration)
-* Sauce POC
 * Docker CI/CD
+* Better DI for drivers
+* Sphinx docs
+* Separate packaging of core modules and page/domain specific modules
+* Sauce POC
+* Implement [Verify statements](https://muthutechno.wordpress.com/2015/01/26/implementing-verify-statements-for-testng-framework/)
+* Test configuration and parameterization through scenario files
+* Improve reporting
+* Test post requests (driver configuration)
