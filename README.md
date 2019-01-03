@@ -27,7 +27,7 @@
 
     ```pytest --html=google-results.html --self-contained-html --cucumber-json=google-results.json```
 
-* Now google-results.html is in the root and can be opened with Chrome. Also, if google-results.json file is in the root directory of the project, run the python script to convert it to cucumber-google-results.html, which should open in your default browser:
+* Now google-results.html is in the root and can be opened with Chrome, note the descriptive log info. Also, if google-results.json file is in the root directory of the project, run the python script to convert it to cucumber-google-results.html, which should open in your default browser:
    
      ```python run_cucumber_report_builder.py```
 
