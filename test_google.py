@@ -3,9 +3,6 @@ import pytest
 from google_page import GooglePage
 from google_result_page import GoogleSearchResultPage
 
-#TODO move logging to command-line-option 
-logging.basicConfig(level=logging.INFO)
-
 class TestGoogle(object):
 
     def test_google_page_display_is_correct(self, google_page):
