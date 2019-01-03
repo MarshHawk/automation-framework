@@ -53,7 +53,7 @@
   #### What Pytest offers:
   * Built-in dependency injection model yields solid tests via fixtures
   * Robust/mature framework, active community
-  * Excellent plugins that work out-of-the-box 
+  * Excellent plugins that work out-of-the-box
 
   #### What VS Code offers
   * VS Code is free, while professional editions of IDEs can get a bit pricey.
