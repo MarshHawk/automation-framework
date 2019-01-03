@@ -17,27 +17,29 @@
     ```source deactivate qa-auto```
     
     ```conda env remove -n=qa-auto```
+* Then re-run the commands to build env after manually entering the dependency in the file.
 * Having activated the env, to run all of the tests, simply execute the pytest command in the root directory of the project. This command should run the tests in both Chrome and Firefox:
     ```pytest```
 * If you keep your locally installed version of Firefox < 48, please pass the legacy flag:
     ```pytest --legacy=True```
 
-* To create html reports in the root directory, run with the following flags:
+* To also reports in the root directory, run with the following flags:
 
     ```pytest --html=google-results.html --self-contained-html --cucumber-json=google-results.json```
 
-* Now google-results.html is in the root and can be opened with Chrome. Also, google-results.json file is in the root directory of the project, now run the python script to convert it to cucumber-google-results.html, which should open in your default browser:
-
-        ```python run_cucumber_report_builder.py```
+* Now google-results.html is in the root and can be opened with Chrome. Also, if google-results.json file is in the root directory of the project, run the python script to convert it to cucumber-google-results.html, which should open in your default browser:
+   
+     ```python run_cucumber_report_builder.py```
 
 ### Best Practices for Coding:
-* Write page object member functions to interact with the page and/or retrieve values, do not use web elements in the tests. The tests should not call functions that return web elements directly. Functions for finding web elements should be private members of page the classes
-* Assert and verify should only be used inside the test functions' scope, not the page object members
+* Write page object member functions to interact with the page and/or retrieve values, do not use web elements in the tests. The tests should not call functions that return web elements directly. Functions for finding web elements should be private members of the page classes.
+* Asserts and verify statements should only be used inside the test functions' scope, not the page object members.
 * Create appropriate waits (e.g. for the presence of an expected element or attribute on the page) when timing issues arise. Don't use time.sleep.
-* Use CSS selectors or IDs to find elements, do not use XPath
+* Use CSS selectors or IDs to find elements, do not use XPath.
 * Write tests that test one thing and test it well. In my experience, people tend to write longer/larger tests instead of isolating functionality into pieces that are as small as logically possible.
 * [PEP 8 - the Style Guide for Python Code](https://pep8.org/)
-* Automate test reporting, the manual process for generating the reports here, including the nodejs dependency, is just for viewing examples
+* Automate test reporting. The manual process for generating the reports here, including the nodejs dependency, is just for viewing examples.
+* Try to use conda-forge for non-Pip dependencies.
 
 ### Choices:
   #### What Conda offers:
@@ -46,6 +48,7 @@
   * Environments, including command line variables, are thouroughly isolated, no global installs necessary (except Conda distro)
   * Switch between Python versions (2.*, 3.*) with simple parameters
   * Use working scientific Python packages (e.g. for machine learning) effortlessly
+  * Conda is not just for Python, other potentially useful tools like Node.js can be added to env
 
   #### What Pytest offers:
   * Built-in dependency injection model yields solid tests via fixtures
@@ -56,6 +59,7 @@
   * VS Code is free, while professional editions of IDEs can get a bit pricey.
   * My experience with VS Code has led me to the opinion that it is the best development experience available outside of Visual Studio Enterprise for .Net. I even use VS Code for Java.
   * VS Code offers the familiar themes (Darcula, etc...), compilation warnings, lots of plugins, and debugging.
+  * PyCharm probably also has a lot of great features
 
 ### Resources:
 [Selenium 3 docs](https://seleniumhq.github.io/selenium/docs/api/py/index.html) 
