@@ -1,11 +1,7 @@
-import sys
 import chromedriver_binary
 import pytest
-from _pytest._code.code import ExceptionInfo, Traceback
-from _pytest.runner import runtestprotocol
 from selenium import webdriver
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
-from verify import Verifier, VerificationError
 
 #Hooks:
 
@@ -24,7 +20,7 @@ def driver_name(request):
 @pytest.fixture("module")
 def driver(request, driver_name):
     use_legacy = request.config.getoption("legacy")
-    if (driver_name == 'chrome'):
+    if driver_name == 'chrome':
         return webdriver.Chrome()
     elif driver_name == 'firefox':
         firefox_capabilities = DesiredCapabilities.FIREFOX

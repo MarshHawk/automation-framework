@@ -5,9 +5,11 @@
 node_modules/
 assets/
 
-### The best IDE ###
+# Visual Studio Code
 .vscode
 
+# Pycharm 
+.idea
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
