@@ -1,0 +1,18 @@
+FROM continuumio/anaconda3
+
+RUN apt-get update && apt-get install -y \
+    xvfb \
+    libasound2 \
+    libgtk2.0-0 \
+    libdbus-glib-1-2 \
+    libxcomposite1 \
+    libgconf2-4 libxss1 \
+    fonts-liberation libappindicator1 xdg-utils \
+    software-properties-common \
+    curl unzip wget
+
+COPY env.yml /work/env.yml
+WORKDIR /work
+
+RUN conda env create -f=env.yml python=3.6
+ADD . /work/.
