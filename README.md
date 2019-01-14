@@ -35,7 +35,7 @@
     
     ```docker build -t some-container-image-repo:$(git rev parse HEAD) -f Dockerfile.tester .```
     
-    ```docker run --rm -i -t automation-framework:tag17 bash -c "Xvfb :1 ${OPTS} & export DISPLAY=:1; source activate qa-auto; pytest"```
+    ```docker run --rm -t some-container-image-repo:$(git rev parse HEAD)7 bash -c "Xvfb :99 ${OPTS} & export DISPLAY=:99; source activate qa-auto; pytest"```
 
 
 ### Best Practices for Coding:
