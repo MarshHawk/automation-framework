@@ -1,15 +1,21 @@
 FROM continuumio/anaconda3
+MAINTAINER Sean Marsh Glover (MarshHawk)
+#Currently borrowing from https://hub.docker.com/r/selenium/ for browser config 
 
-RUN apt-get update && apt-get install -y \
-    xvfb \
-    libasound2 \
-    libgtk2.0-0 \
-    libdbus-glib-1-2 \
-    libxcomposite1 \
-    libgconf2-4 libxss1 \
-    fonts-liberation libappindicator1 xdg-utils \
-    software-properties-common \
-    curl unzip wget
+ARG FIREFOX_VERSION=latest
+RUN FIREFOX_DOWNLOAD_URL=$(if [ $FIREFOX_VERSION = "latest" ] || [ $FIREFOX_VERSION = "nightly-latest" ] || [ $FIREFOX_VERSION = "devedition-latest" ]; then echo "https://download.mozilla.org/?product=firefox-$FIREFOX_VERSION-ssl&os=linux64&lang=en-US"; else echo "https://download-installer.cdn.mozilla.net/pub/firefox/releases/$FIREFOX_VERSION/linux-x86_64/en-US/firefox-$FIREFOX_VERSION.tar.bz2"; fi) \
+  && apt-get update -qqy \
+  && apt-get install -y xvfb gnupg\
+  && apt-get -qqy --no-install-recommends install iceweasel
+
+ARG CHROME_VERSION="google-chrome-stable"
+RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
+  && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list \
+  && apt-get update -qqy \
+  && apt-get -qqy install \
+    ${CHROME_VERSION:-google-chrome-stable} \
+  && rm /etc/apt/sources.list.d/google-chrome.list \
+  && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 
 COPY env.yml /work/env.yml
 WORKDIR /work

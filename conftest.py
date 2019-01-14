@@ -2,6 +2,7 @@ import chromedriver_binary
 import pytest
 from selenium import webdriver
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+from selenium.webdriver.chrome.options import Options
 
 #Hooks:
 
@@ -21,7 +22,12 @@ def driver_name(request):
 def driver(request, driver_name):
     use_legacy = request.config.getoption("legacy")
     if driver_name == 'chrome':
-        return webdriver.Chrome()
+        chrome_options = Options()
+        chrome_options.add_argument('--no-sandbox')
+        chrome_options.add_argument('--disable-extensions')
+        #TODO: request logging fetchable config
+        #chrome_capabilities = DesiredCapabilities.CHROME
+        return webdriver.Chrome(options=chrome_options)
     elif driver_name == 'firefox':
         firefox_capabilities = DesiredCapabilities.FIREFOX
         firefox_capabilities['marionette'] = False if use_legacy else True

@@ -23,13 +23,20 @@
 * If you keep your locally installed version of Firefox < 48, please pass the legacy flag:
     ```pytest --legacy=True```
 
-* To also reports in the root directory, run with the following flags:
+* To output reports in the root directory, run with the following flags:
 
     ```pytest --html=google-results.html --self-contained-html --cucumber-json=google-results.json```
 
 * Now google-results.html is in the root and can be opened with Chrome, note the descriptive log info. Also, if google-results.json file is in the root directory of the project, run the python script to convert it to cucumber-google-results.html, which should open in your default browser:
    
      ```python run_cucumber_report_builder.py```
+
+* To run the tests in a Docker container; build, tag, run:
+    
+    ```docker build -t some-container-image-repo:$(git rev parse HEAD) -f Dockerfile.tester .```
+    
+    ```docker run --rm -i -t automation-framework:tag17 bash -c "Xvfb :1 ${OPTS} & export DISPLAY=:1; source activate qa-auto; pytest"```
+
 
 ### Best Practices for Coding:
 * Write page object member functions to interact with the page and/or retrieve values, do not use web elements in the tests. The tests should not call functions that return web elements directly. Functions for finding web elements should be private members of the page classes.
