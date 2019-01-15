@@ -36,7 +36,7 @@ class GooglePage(BasePage):
         we.send_keys(Keys.TAB)
 
     def click_search_box(self):
-        self.logger.info('clearing search box')
+        self.logger.info('clicking search box')
         self.__get_search_box().click()
 
     def clear_search_box(self):
